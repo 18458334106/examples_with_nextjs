@@ -11,7 +11,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  window.addEventListener('resize',()=>{ setFontSize() })
   const setFontSize = () => {
     let doc = document.documentElement;
     let fontSize = doc.clientWidth / 120 > 10 ? doc.clientWidth / 120 : 10
@@ -20,6 +19,7 @@ export default function RootLayout({
   }
   useEffect(()=>{
     setFontSize()
+    window.addEventListener('resize',()=>{ setFontSize() })
   })
   return (
     <html lang="en">
