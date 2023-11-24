@@ -1,8 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation"
 import styles from "./page.module.scss"
-import { examplesArr } from './examples' 
-import { useEffect } from "react"
+import { examplesArr } from './examples'
 const examples = [...examplesArr]
 
 const example = (obj:any,index:number) => {
