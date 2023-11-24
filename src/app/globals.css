@@ -1,27 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+body{
+  width: 100vw;
+  height: 100vh;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.container{
+  width: 100%;
+  height: 100%;
+}
+.flexRow{
+  display: flex;
+}
+.flexRowCenterAll{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+}
+.flexColumnCenterAll{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.TextCenter{
+  text-align: center;
+}
+.ellipsis{
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
