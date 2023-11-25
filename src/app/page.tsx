@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation"
 import styles from "./page.module.scss"
 import { examplesArr } from './examples'
+import { login } from "@/api/user"
 const examples = [...examplesArr]
 
 const Example = ({obj}:{obj:any}) => {

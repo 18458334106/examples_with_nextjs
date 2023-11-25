@@ -17,4 +17,17 @@
             color: red !important;
         }
     }
+    .rightMenu{
+        position: absolute;
+        right: 2rem;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.2rem;
+        img{
+            width: 3rem;
+            height: 3rem;
+            border-radius: .25rem;
+            margin: 0 0 0 1rem;
+        }
+    }
 }
