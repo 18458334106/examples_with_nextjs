@@ -30,4 +30,68 @@
             margin: 0 0 0 1rem;
         }
     }
+    .loginView{
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba($color: #000000, $alpha: .7);
+        transition: all .3s;
+        animation: show .3s ease-in-out;
+        @keyframes show {
+            from{ opacity: 0; }
+            to{ opacity: 1; }
+        }
+        .loginMain{
+            width: 40rem;
+            height: 30rem;
+            background: white;
+            padding: 2rem;
+            border-radius: .5rem;
+            justify-content: space-around;
+            .loginTitle{
+                width: 100%;
+                height: 3rem;
+                text-align: right;
+            }
+            .loginText{
+                margin: 1rem 0;
+                font-size: 1rem;
+                color: #687076;
+                text-align: right;
+            }
+            .ant-form{
+                width: 100% !important;
+                height: 18rem !important;
+                overflow: hidden;
+                .formLabel{
+                    font-size: 1rem;
+                    height: auto;
+                    color: #687076;
+                }
+                .ant-form-item-control-input-content{
+                    height: 5rem !important;
+                    margin-bottom: unset !important;
+                    .ant-input{
+                        height: 3rem !important;
+                    }
+                }
+            }
+            .submit{
+                width: 100% !important;
+                justify-content: flex-end !important;
+                margin-bottom: unset;
+                height: 4rem;
+                .ant-btn{
+                    width: 8rem;
+                    height: 3rem !important;
+                }
+            }
+            .defaultAuth{
+                height: 2rem;
+                color: #687076;
+            }
+        }
+    }
 }
