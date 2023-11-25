@@ -1,4 +1,4 @@
-import { setToken } from "@/utils/auth";
+import { getToken, setToken } from "@/utils/auth";
 import { supabase } from "@/utils/sql"
 
 interface LoginForm {
@@ -36,4 +36,9 @@ export const login = async(loginForm:LoginForm) => {
         resp.msg = error.message
     }
     return resp
+}
+
+export const getInfo = () => {
+    // @ts-ignore
+    return JSON.parse(window.atob(getToken()))
 }

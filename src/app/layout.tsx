@@ -4,6 +4,8 @@ import './globals.css'
 import AppMain from "@/Layout/AppMain/AppMain";
 import NavBar from "@/Layout/NavBar/NavBar"
 import { useEffect } from "react"
+import { Provider } from 'react-redux'
+import store from '@/store'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -24,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Provider store={store}>
           <NavBar/>
           <AppMain>{children}</AppMain>
-        </body>
+        </Provider>
+      </body>
     </html>
   )
 }
