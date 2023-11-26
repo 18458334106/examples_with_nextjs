@@ -1,42 +1,7 @@
-export const examplesArr = [
-    {
-        path:'sassStarSky',
-        name:'Sass星空'
-    },
-    {
-        path:'particles',
-        name:'Particles'
-    },
-    {
-        path:'upload',
-        name:'七牛云文件上传'
-    },
-    {
-        path:'svgAnimation',
-        name:'图标动画'
-    },
-    {
-        path:'gridAnimation',
-        name:'宫格hover动画'
-    },
-    {
-        path:'cssFilter',
-        name:'CSS滤镜效果'
-    },
-    {
-        path:'imgColorThief',
-        name:'图片调色盘'
-    },
-    {
-        path:'waterFull',
-        name:'纯CSS瀑布流布局'
-    },
-    {
-        path:'infiniteParallaxScrolling',
-        name:'无限视差滚动'
-    },
-    {
-        path:'snow',
-        name:'飘雪'
-    }
-]
+import { getExamples } from "@/api/examples"
+
+export let examplesArr = []
+export const get_examples = async() => {
+    const res = await getExamples()
+    examplesArr = res.data || []
+}

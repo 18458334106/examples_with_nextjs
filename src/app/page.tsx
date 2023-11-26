@@ -1,10 +1,9 @@
 "use client"
 import { useRouter } from "next/navigation"
 import styles from "./page.module.scss"
-import { examplesArr } from './examples'
-import { login } from "@/api/user"
-const examples = [...examplesArr]
-
+import { examplesArr,get_examples } from './examples'
+import { useEffect, useState } from "react"
+get_examples()
 const Example = ({obj}:{obj:any}) => {
     const router = useRouter()
     return (
@@ -17,6 +16,12 @@ const Example = ({obj}:{obj:any}) => {
 }
 
 export default function Page(){
+    let [examples,setExamples] = useState([])
+    useEffect(()=>{
+        setTimeout(()=>{
+            setExamples(examplesArr)
+        },1000)
+    })
     return (
         <div className="container">
             <div className={styles.examples}>
