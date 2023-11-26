@@ -1,0 +1,60 @@
+.scroll-container {
+    height: calc(100vh - 50px);
+    position: relative;
+    .item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transition: 1s ease-in-out;
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            transition: 1s ease-in-out;
+        }
+    }
+    .item.pre,
+    .item.next {
+        z-index: 1;
+        height: 0;
+    }
+    
+    .item.pre {
+        top: 0;
+    }
+    
+    .item.next {
+        bottom: 0
+    }
+    
+    .item.pre img {
+        transform: translateY(-10%);
+    }
+    
+    .item.next img {
+        bottom: 0;
+        transform: translateY(10%);
+    }
+}
+.scroll-up .pre,
+.scroll-down .next {
+    height: 100%;
+}
+
+.scroll-up .pre img {
+    transform: translateY(0);
+}
+
+.scroll-up .cur img {
+    transform: translateY(10%);
+}
+
+.scroll-down .next img {
+    transform: translateY(0);
+}
+
+.scroll-down .cur img {
+    transform: translateY(-10%);
+}

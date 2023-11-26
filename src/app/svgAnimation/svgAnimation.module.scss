@@ -1,0 +1,17 @@
+.p{
+    fill: none;
+    stroke: transparent;
+    stroke-width: 10;
+    stroke-dasharray: var(--l);
+    stroke-dashoffset: var(--l);
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-miterlimit: 1;
+    animation: stroke 5s infinite;
+}
+@keyframes stroke {
+    to{
+      stroke-dashoffset: 0;
+      fill: black;
+    }
+}
