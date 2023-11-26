@@ -3,12 +3,12 @@ import { useRouter } from "next/navigation"
 import styles from "./page.module.scss"
 import { examplesArr,get_examples } from './examples'
 import { useEffect, useState } from "react"
-get_examples()
+
 const Example = ({obj}:{obj:any}) => {
     const router = useRouter()
     return (
         <div className={styles.example} onClick={()=>{
-            router.push(obj.path)
+            router.push(`/${obj.path}`)
         }}>
             <span className="ellipsis">{ obj.name }</span>
         </div>
@@ -16,17 +16,20 @@ const Example = ({obj}:{obj:any}) => {
 }
 
 export default function Page(){
-    let [examples,setExamples] = useState([])
+    let [examples,setExamples] = useState<any[] | null>(null)
     useEffect(()=>{
-        setTimeout(()=>{
-            setExamples(examplesArr)
-        },1000)
+        if(examples === null){
+            (async()=>{
+                await get_examples()
+                setExamples(examplesArr)
+            })()
+        }
     })
     return (
         <div className="container">
             <div className={styles.examples}>
                 {
-                    examples.map((item:any,index:number) => {
+                    examples && examples.map((item:any,index:number) => {
                         return <Example key={index} obj={item} />
                     })
                 }
