@@ -2,13 +2,26 @@
 import { useRouter } from "next/navigation"
 import styles from "./page.module.scss"
 import { examplesArr,get_examples } from './examples'
-import { useEffect, useState } from "react"
-
+import { useEffect, useState,useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { showLogin } from "@/store/userSlice"
 const Example = ({obj}:{obj:any}) => {
     const router = useRouter()
+    let userState = useSelector((state:any) => state.userSlice);
+    let isLogin = useRef(false)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        if(userState.token && userState.userInfo.username){
+            isLogin.current = true
+        }
+    },[userState])
     return (
         <div className={styles.example} onClick={()=>{
-            router.push(`/${obj.path}`)
+            if(isLogin.current){
+                router.push(obj.path)
+            }else{
+                dispatch(showLogin(true))
+            }
         }}>
             <span className="ellipsis">{ obj.name }</span>
         </div>
