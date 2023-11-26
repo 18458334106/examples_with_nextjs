@@ -2,18 +2,18 @@
 import { useEffect } from 'react';
 import styles from './meteor.module.scss'
 
-export default function meteor(){
+export default function Meteor(){
     //@ts-ignore
     let canvas,ctx;
     //@ts-ignore
     let meteors = []
     let allstar = 40
-    function init() {
+    const init = () => {
         for (let i= 0; i< allstar; i++) {
             newmeteor()
         }
     }
-    function newmeteor(){
+    const newmeteor = () => {
         meteors.push({
             lines: [{
                 //@ts-ignore
@@ -26,7 +26,7 @@ export default function meteor(){
             age: 0
         })
     }
-    function draw(){
+    const draw = () => {
         //@ts-ignore
         ctx.clearRect(0,0,canvas.width, canvas.height)
         for(let i = 0; i < meteors.length; i++){

@@ -1,10 +1,11 @@
 "use client"
 import { useEffect, useState } from "react";
 import './infiniteParallaxScrolling.scss'
-export default function infiniteParallaxScrolling(){
-    let container;
+function InfiniteParallaxScrolling(){
+    let container:any;
     let offsetWidth,offsetHeight,imgArr:any;
-    let curIndex = 0
+    let curIndex = 0;
+    let isAnimation = false;
     const getPrevIndex = () => {
         return curIndex === 0 ? imgArr.length - 1 : curIndex - 1
     }
@@ -30,7 +31,7 @@ export default function infiniteParallaxScrolling(){
         createElement(curIndex).classList.add('cur');
         createElement(nextIndex).classList.add('next');
     }
-    let isAnimation = false
+    
     useEffect(()=>{
         container = document.getElementById("scroll-container")
         if(container){
@@ -75,3 +76,4 @@ export default function infiniteParallaxScrolling(){
         <div id="scroll-container" className="scroll-container"></div>
     )
 }
+export default InfiniteParallaxScrolling;

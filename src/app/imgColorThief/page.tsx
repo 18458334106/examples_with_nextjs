@@ -46,6 +46,7 @@ export default class ColorThief extends Component {
             <div className={`${style.container} flexRowCenterAll`}>
                 <div className={`${style.imgs} flexRowCenterAll`}>
                     {
+                        //@ts-ignore
                         this.state.imgsArr.map((item:any,index:any)=>{
                             return (
                                 <img key={index} src={item}

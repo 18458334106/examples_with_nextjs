@@ -2,7 +2,7 @@
 import { useEffect,useState } from 'react';
 import styles from './snow.module.scss'
 
-export default function snow(){
+function Snow(){
     let container,offsetWidth:any,offsetHeight:any;
     let canvas,ctx:any;
     let nums = 200
@@ -89,3 +89,5 @@ export default function snow(){
         </div>
     )
 }
+
+export default Snow;
