@@ -7,6 +7,7 @@ import { getInfo } from '@/api/user'
 import { useSelector,useDispatch } from 'react-redux'
 import { loginFn,showLogin,getUserInfo } from '../../store/userSlice'
 import { Form,Input,Button } from 'antd'
+import Image from 'next/image'
 
 function NavLink({href,text}:{href:string,text:string}){
     const pathName = usePathname()
@@ -31,7 +32,12 @@ const RightMenu = () => {
     },[userState,dispatch])
 
     if(userState.userInfo.username){
-        return <div className={`${styles.rightMenu} flexRowCenterAll`}>{ userState.userInfo.username }</div>
+        return (
+            <div className={`${styles.rightMenu} flexRowCenterAll`}>
+                <span>{userState.userInfo.username}</span>
+                <Image className={`${styles.userAvatar}`} src={require('../../assets/avatar.png')} alt=''/>
+            </div>
+        )
     }else{
         return <div className={`${styles.rightMenu} flexRowCenterAll`} onClick={()=>{
             dispatch(showLogin(true))
@@ -121,7 +127,9 @@ const LoginView = () => {
 export default function NavBar(){
     return (
         <div className={`${styles.NavBar} flexRow`}>
-            <NavLink href="/" text="Home" />
+            <NavLink href="/" text="首页" />
+            <NavLink href="/msg" text="留言" />
+            <NavLink href="/about" text="关于我" />
             <RightMenu />
             <LoginView />
         </div>

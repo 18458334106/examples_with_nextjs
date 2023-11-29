@@ -18,7 +18,7 @@ const Example = ({obj}:{obj:any}) => {
     return (
         <div className={styles.example} onClick={()=>{
             if(isLogin.current){
-                router.push(obj.path)
+                router.push(`/components/${obj.path}`)
             }else{
                 dispatch(showLogin(true))
             }

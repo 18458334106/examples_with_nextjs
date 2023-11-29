@@ -1,0 +1,23 @@
+.title{
+    animation: toBig 1s ease-in-out;
+}
+.infos{
+  margin: 2rem 0;
+  .item{
+      margin: 0 2rem;
+      animation: toBig 1s ease-in-out;
+      img{
+          width: 3rem;
+          height: 3rem;
+          transition: all 0.3s;
+          &:hover{
+              cursor: pointer;
+              transform: scale(1.2);
+          }
+      }
+  }
+}
+@keyframes toBig {
+    from{ transform: scale(0); }
+    to{ transform: scale(1); }
+}

@@ -1,7 +1,7 @@
 "use client"
 import { Component } from 'react';
 import style from './upload.module.scss';
-import { uploadFile } from '../../utils/uploadHelper'
+import { uploadFile } from '../../../utils/uploadHelper'
 export default class Upload extends Component{
     uploadImage(e:any){
         let files = e.target.files;
