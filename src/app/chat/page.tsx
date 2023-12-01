@@ -47,7 +47,7 @@ export default function Chat(){
                                 <div className={styles.chatDetailRecode}>
                                     {
                                         chatDetail && chatDetail.recode && chatDetail.map((item:any,index:number) => (
-                                            <div className={`${styles.recodeItem} flexRow`}>
+                                            <div className={`${styles.recodeItem} flexRow`} key={index}>
                                                 {
                                                     item.userId === chatDetail.userId ? (
                                                         <div className={`${styles.recodeDetail} flexRow`} key={index}>
