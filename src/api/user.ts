@@ -42,3 +42,35 @@ export const getInfo = () => {
     // @ts-ignore
     return JSON.parse(window.atob(getToken()))
 }
+
+export const queryUserList = async(params:any) => {
+    const { username } = params
+    let sql = supabase.from('sys_user').select('*')
+    if(username){
+        const { data,status,error }:{
+            data:any[] | null,
+            status:number,
+            error:any
+        } = await sql.eq('username', username)
+        let resp:{
+            status:number,
+            data:any | null,
+            error:any | null,
+            msg:string | null
+        } = { status,data,error,msg:null }
+        return resp
+    }else{
+        const { data,status,error }:{
+            data:any[] | null,
+            status:number,
+            error:any
+        } = await sql
+        let resp:{
+            status:number,
+            data:any | null,
+            error:any | null,
+            msg:string | null
+        } = { status,data,error,msg:null }
+        return resp
+    }
+}

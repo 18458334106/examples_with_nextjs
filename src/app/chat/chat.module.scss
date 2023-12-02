@@ -82,6 +82,20 @@
                 font-size: 2rem;
                 overflow-y: scroll;
                 transition: all .5s;
+                /* 隐藏滚动条 */
+                ::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                    background-color: transparent;
+                }
+                /* 隐藏滚动条轨道 */
+                ::-webkit-scrollbar-track {
+                    background-color: transparent;
+                }
+                /* 隐藏滚动条滑块 */
+                ::-webkit-scrollbar-thumb {
+                    background-color: transparent;
+                }
                 .recodeItem{
                     width: 100%;
                     font-size: 1.2rem;
@@ -138,20 +152,6 @@
         }
     }
 }
-// /* 隐藏滚动条 */
-// ::-webkit-scrollbar {
-//     width: 0;
-//     height: 0;
-//     background-color: transparent;
-// }
-// /* 隐藏滚动条轨道 */
-// ::-webkit-scrollbar-track {
-//     background-color: transparent;
-// }
-// /* 隐藏滚动条滑块 */
-// ::-webkit-scrollbar-thumb {
-//     background-color: transparent;
-// }
 .searchBtn{
     width: 6rem;
     background: #409eff !important;
@@ -179,12 +179,12 @@
                 border-radius: .5rem;
             }
         }
-        .userInfo{
-
-        }
         .newChatBtn{
             position: absolute;
             right: 0;
         }
     }
+}
+.ant-input-group-addon{
+    width: 500px;
 }
