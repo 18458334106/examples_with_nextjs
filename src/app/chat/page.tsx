@@ -8,7 +8,8 @@ import { queryUserList } from '@/api/user'
 import { useEffect, useState,useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { showLogin } from "@/store/userSlice"
-
+import io from 'socket.io-client';
+import { getToken } from '@/utils/auth'
 const { Search } = Input;
 export default function Chat(){
     let [chatList, setChatList] = useState<any[] | null>(null)
@@ -64,6 +65,59 @@ export default function Chat(){
             isLogin.current = true
         }
     },[userState])
+    const socket = io("https://flask-py.vercel.app/chat"); // 这里替换成你的服务器地址
+    // const socket = io("http://127.0.0.1:5001/chat"); // 这里替换成你的服务器地址
+    useEffect(() => {
+        socket.on("connect", () => {
+            console.log(`连接socket服务器:${socket.connected}`);
+        });
+        socket.on("disconnect", () => { console.log(`断开socket服务器:${socket.connected}`); });
+        socket.on("message", (msg) => { 
+            console.log("新消息",msg);
+            chatDetail.value.recode.push({
+                userId:chatDetail.id,
+                username: chatDetail.username,
+                chatContent: msg
+            })
+            setChatDetail({...chatDetail})
+        });
+        socket.on("message update",(msg)=>{
+            console.log("消息更新",msg);
+            let userId_msg = msg.userId
+            let toUserId_msg = msg.toUserId
+            let type = false
+            //@ts-ignore
+            let userInfo = JSON.parse(window.atob(getToken()))
+            if(userInfo.id === toUserId_msg){
+                let _chatList = chatList || []
+                chatList && chatList.map((i,index)=>{
+                    if(i.userId === userId_msg){
+                        let arr = i.recode || []
+                        arr.push(msg)
+                        type = true
+                        i.unread = true
+                        i.recode = arr
+                    }
+                })
+                setChatList([..._chatList])
+                if(!type){
+                    let arr = chatList || []
+                    arr.push({
+                        id:userId_msg,
+                        username:msg.username,
+                        recode:[msg],
+                        unread:true
+                    })
+                    setChatList([...arr])
+                }
+                console.log(chatList);
+                
+            }
+        })
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
 
     return (
         <div className="container flexRowCenterAll">
@@ -108,6 +162,9 @@ export default function Chat(){
                             chatList && chatList.length >0 ? chatList.map((item:any,index:number) => {
                                 return (
                                     <div className={`${styles.listItem} flexRow`} key={index} onClick={async()=>{
+                                        let _chatList = chatList || []
+                                        _chatList[index].unread = false
+                                        setChatList([..._chatList])
                                         const res = await getChatRecodes(item.id)
                                         item.recode = res?.data || []
                                         setChatDetail(item)
@@ -165,13 +222,31 @@ export default function Chat(){
                                     }
                                 </div>
                                 <div className={styles.chatDetailInput}>
-                                    <textarea placeholder="请输入……" id={styles.chatDetailTextarea} cols={30} rows={10} />
+                                    <textarea placeholder="请输入……" id={styles.chatDetailTextarea} cols={30} rows={10}
+                                    onFocus={()=>{
+                                        let _chatList = chatList || []
+                                        _chatList?.map(item=>{
+                                            if(item.id === chatDetail.id){
+                                                item.unread = false
+                                            }
+                                        })
+                                        setChatList([..._chatList])
+                                    }} />
                                     <div className={`${styles.submit} flexRow`}>
                                         <Button type="primary" onClick={async()=>{
                                             let textarea:HTMLElement | null = document.getElementById(styles.chatDetailTextarea)
                                             //@ts-ignore
                                             let content = textarea.value || ''
                                             let { userId,username } = chatDetail
+                                            //@ts-ignore
+                                            let userInfo = JSON.parse(window.atob(getToken()))
+                                            socket.emit("message",{
+                                                userId:userInfo.id,
+                                                username: userInfo.username,
+                                                toUserId: chatDetail.id,
+                                                toUsername: chatDetail.username,
+                                                chatContent: content
+                                            });
                                             const res:any | undefined = await sendChatRecode({ content,toUserId:userId,toUsername:username })
                                             if(res && res.status === 201){
                                                 chatDetail.recode.push(res.data)

@@ -129,7 +129,7 @@ export default function NavBar(){
         <div className={`${styles.NavBar} flexRow`}>
             <NavLink href="/" text="首页" />
             <NavLink href="/msg" text="留言" />
-            <NavLink href="/chat" text="传话" />
+            <NavLink href="/chat" text="聊天" />
             <NavLink href="/about" text="关于我" />
             <RightMenu />
             <LoginView />
