@@ -2,7 +2,7 @@
 import styles from './yControlScrollX.module.scss'
 import { useState,useEffect } from 'react'
 import Image from 'next/image'
-export default function yControlScrollX(){
+export default function YControlScrollX(){
     let [
         scroll_container,
         setScrollContainer
