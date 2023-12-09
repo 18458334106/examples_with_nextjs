@@ -1,0 +1,57 @@
+@use 'sass:math';
+    .container{
+        height: calc(100vh - 50px);
+        background: black;
+        justify-content: center;
+        $size: 200px;
+        $n: 6;
+        $pDeg: 360deg / $n;
+        $r: $size / 2;
+        $R: $r / math.sin($pDeg / 2);
+        $innnerSize: $R * 2;
+        .content{
+            width: $size;
+            height: $size;
+            border-radius: 50%;
+            outline: 5px solid white;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            .inner{
+                width: $innnerSize;
+                height: $innnerSize;
+                border-radius: 50%;
+                margin-top: $r;
+                position: relative;
+                animation: moving 5s infinite;
+                .image{
+                    width: $size;
+                    height: $size;
+                    border-radius: 50%;
+                    position: absolute;
+                    left: 50%;
+                    margin-left: -$size / 2;
+                    top:-$r;
+                    transform-origin: center #{$r + $R};
+                    @for $i from 1 through $n{
+                        &:nth-child(#{$i}){
+                            transform: rotate($pDeg * ($i + 1));
+                        }
+                    }
+               } 
+            }
+            $u: 1 / $n * 100%;
+            $stopPercent: 0.6 * $u;
+            @keyframes moving {
+                @for $i from 1 through $n{
+                    $p:$u * $i;
+                    $Deg:$pDeg * $i;
+                    #{$p - $stopPercent},
+                    #{$p}{
+                        transform: rotate(-$Deg);
+                    }
+                }
+            }
+        }
+    }

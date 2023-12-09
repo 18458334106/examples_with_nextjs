@@ -51,3 +51,26 @@ body{
 ::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
+
+#curContainer{
+  padding: 1rem;
+  justify-content: flex-end;
+  height: calc(100vh - 50px);
+}
+.dark{
+  background: black;
+}
+::view-transition-old(*) {
+  animation: none;
+}
+::view-transition-new(*) {
+  animation: effects 1s ease-in;
+}
+@keyframes effects {
+  from{
+      clip-path: circle(0% at var(--x) var(--y));
+  }
+  to{
+      clip-path: circle(100% at var(--x) var(--y));
+  }
+}
