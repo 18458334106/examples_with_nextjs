@@ -1,4 +1,4 @@
-import styles from './TextShadow.module.scss'
+import styles from './textShadow.module.scss'
 
 export default function TextShadow(){
     return (
